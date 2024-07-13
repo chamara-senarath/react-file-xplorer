@@ -1,11 +1,88 @@
 import Explorer from "../components/Explorer";
 
+const explorer = {
+  id: "1",
+  name: "root",
+  isFolder: true,
+  items: [
+    {
+      id: "2",
+      name: "public",
+      isFolder: true,
+      items: [
+        {
+          id: "3",
+          name: "public nested 1",
+          isFolder: true,
+          items: [
+            {
+              id: "4",
+              name: "index.html",
+              isFolder: false,
+              items: [],
+            },
+            {
+              id: "5",
+              name: "hello.html",
+              isFolder: false,
+              items: [],
+            },
+          ],
+        },
+        {
+          id: "6",
+          name: "public_nested_file",
+          isFolder: false,
+          items: [],
+        },
+      ],
+    },
+    {
+      id: "7",
+      name: "src",
+      isFolder: true,
+      items: [
+        {
+          id: "8",
+          name: "App.js",
+          isFolder: false,
+          items: [],
+        },
+        {
+          id: "9",
+          name: "Index.js",
+          isFolder: false,
+          items: [],
+        },
+        {
+          id: "10",
+          name: "styles.css",
+          isFolder: false,
+          items: [],
+        },
+      ],
+    },
+    {
+      id: "11",
+      name: "package.json",
+      isFolder: false,
+      items: [],
+    },
+  ],
+};
+
+const ExplorerWrapper = () => {
+  return (
+    <div className="bg-gray-200 rounded-lg min-h-screen p-2 w-1/2">
+      <Explorer explorer={explorer} />
+    </div>
+  );
+};
+
 export default {
-  component: Explorer,
+  component: ExplorerWrapper,
   title: "Explorer",
   tags: ["autodocs"],
 };
 
-export const Default = {
-  args: {},
-};
+export const Default = {};
