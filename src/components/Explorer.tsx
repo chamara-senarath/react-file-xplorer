@@ -15,7 +15,7 @@ type FileStructure = {
 };
 
 interface Props {
-  explorer: FileStructure;
+  fileStructure: FileStructure;
   icons?: {
     size?: number;
     fileIcon?: string;
@@ -25,6 +25,7 @@ interface Props {
     chevronDownIcon?: string;
   };
   level?: number;
+  onItemClick?: (id: string) => void;
 }
 
 const DEFAULT_ICON_SIZE = 14;
@@ -40,30 +41,39 @@ const VerticalLine = ({ space }: { space: number }) => {
   );
 };
 
-const Explorer = ({ explorer, icons, level = 0 }: Props) => {
+const Explorer = ({ fileStructure, icons, level = 0, onItemClick }: Props) => {
   const [expand, setExpand] = useState(false);
 
   const getIcon = (
     localIcon: string | undefined,
     globalIcon: string | undefined,
-    defaultIcon: string
+    defaultIcon: string,
   ) => {
     return localIcon ?? globalIcon ?? defaultIcon;
   };
 
   const fileIcon = useMemo(() => {
-    return getIcon(explorer.icon, icons?.fileIcon, defaultFileIcon);
-  }, [explorer.icon, icons?.fileIcon]);
+    return getIcon(fileStructure.icon, icons?.fileIcon, defaultFileIcon);
+  }, [fileStructure.icon, icons?.fileIcon]);
 
   const folderOpenIcon = useMemo(
-    () => getIcon(explorer?.icon, icons?.folderOpenIcon, defaultFolderOpenIcon),
-    [explorer?.icon, icons?.folderOpenIcon]
+    () =>
+      getIcon(
+        fileStructure?.icon,
+        icons?.folderOpenIcon,
+        defaultFolderOpenIcon,
+      ),
+    [fileStructure?.icon, icons?.folderOpenIcon],
   );
 
   const folderClosedIcon = useMemo(
     () =>
-      getIcon(explorer?.icon, icons?.folderClosedIcon, defaultFolderClosedIcon),
-    [explorer?.icon, icons?.folderClosedIcon]
+      getIcon(
+        fileStructure?.icon,
+        icons?.folderClosedIcon,
+        defaultFolderClosedIcon,
+      ),
+    [fileStructure?.icon, icons?.folderClosedIcon],
   );
 
   const chevronUpIcon = icons?.chevronUpIcon ?? defaultChevronUpIcon;
@@ -72,7 +82,7 @@ const Explorer = ({ explorer, icons, level = 0 }: Props) => {
   const iconSize = icons?.size ?? DEFAULT_ICON_SIZE;
 
   const handleOnClick = () => {
-    console.log(explorer.id);
+    if (onItemClick) onItemClick(fileStructure.id);
   };
 
   const onClickChevron: MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -82,7 +92,7 @@ const Explorer = ({ explorer, icons, level = 0 }: Props) => {
   };
 
   // Return folder
-  if (explorer.isFolder) {
+  if (fileStructure.isFolder) {
     return (
       <div className="flex flex-col relative">
         {level > 0 && <VerticalLine space={level} />}
@@ -100,7 +110,7 @@ const Explorer = ({ explorer, icons, level = 0 }: Props) => {
               src={expand ? folderOpenIcon : folderClosedIcon}
               width={iconSize}
             />
-            {explorer.name}
+            {fileStructure.name}
           </span>
           <button
             className="select-none cursor-pointer"
@@ -115,13 +125,14 @@ const Explorer = ({ explorer, icons, level = 0 }: Props) => {
         <div
           className={classNames(expand ? "flex flex-col" : "hidden", "py-1")}
         >
-          {explorer.items.map((item) => {
+          {fileStructure.items.map((item) => {
             return (
               <Explorer
-                explorer={item}
+                fileStructure={item}
                 icons={icons}
                 key={item.id}
                 level={level + 4}
+                onItemClick={onItemClick}
               />
             );
           })}
@@ -144,7 +155,7 @@ const Explorer = ({ explorer, icons, level = 0 }: Props) => {
         onClick={handleOnClick}
       >
         <img src={fileIcon} width={iconSize} />
-        <span>{explorer.name}</span>
+        <span>{fileStructure.name}</span>
       </div>
     </div>
   );
