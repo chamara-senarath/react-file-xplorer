@@ -1,4 +1,4 @@
-import { MouseEventHandler, useMemo, useState } from "react";
+import { MouseEventHandler, useEffect, useMemo, useState } from "react";
 import { classNames } from "../util";
 import defaultChevronDownIcon from "../assets/chevron-down.svg";
 import defaultChevronUpIcon from "../assets/chevron-up.svg";
@@ -26,6 +26,7 @@ interface Props {
   };
   level?: number;
   onItemClick?: (id: string) => void;
+  isRootExpanded?: boolean;
 }
 
 const DEFAULT_ICON_SIZE = 14;
@@ -41,7 +42,13 @@ const VerticalLine = ({ space }: { space: number }) => {
   );
 };
 
-const Explorer = ({ fileStructure, icons, level = 0, onItemClick }: Props) => {
+const Explorer = ({
+  fileStructure,
+  icons,
+  level = 0,
+  onItemClick,
+  isRootExpanded = false,
+}: Props) => {
   const [expand, setExpand] = useState(false);
 
   const getIcon = (
@@ -91,10 +98,15 @@ const Explorer = ({ fileStructure, icons, level = 0, onItemClick }: Props) => {
     setExpand(!expand);
   };
 
+  // Set root expand
+  useEffect(() => {
+    setExpand(isRootExpanded);
+  }, [isRootExpanded]);
+
   // Return folder
   if (fileStructure.isFolder) {
     return (
-      <div className="flex flex-col relative">
+      <div className="flex flex-col relative w-full">
         {level > 0 && <VerticalLine space={level} />}
         <div
           className="flex justify-between px-2 py-1 hover:bg-gray-50 rounded-lg"
