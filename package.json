@@ -32,7 +32,7 @@
     "preview": "vite preview",
     "prepublishOnly": "npm run build",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d build"
   },
   "peerDependencies": {
     "react": "^17.0.0 || ^18.0.0",
