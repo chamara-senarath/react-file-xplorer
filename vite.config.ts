@@ -44,5 +44,6 @@ export default defineConfig({
         entryFileNames: '[name].js',
       }
     }
-  }
+  },
+  base: "react-file-xplorer"
 })
