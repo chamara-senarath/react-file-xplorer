@@ -1,12 +1,16 @@
 import GitHubIcon from "./assets/github.svg";
 import NpmIcon from "./assets/npm.svg";
 import Logo from "./assets/logo.svg";
-import { useState } from "react";
+import { ComponentProps, useState } from "react";
 import FeatureNavigationIcon from "./assets/feature-navigation.svg";
 import FeatureCustomizableIconsIcon from "./assets/feature-customizable-icons.svg";
 import FeatureTypeScriptSupportIcon from "./assets/feature-ts-support.svg";
 import FeatureEventHandlingIcon from "./assets/feature-event-handling.svg";
 import { Explorer } from "../lib/main";
+
+type FileStructure = ComponentProps<typeof Explorer>["fileStructure"];
+type FileItem = Pick<FileStructure, "id" | "name" | "isFolder">;
+type Node = FileItem & { items: Node[] };
 
 const fileStructure = {
   id: "1",
@@ -107,10 +111,10 @@ const infoCardsData = [
 function App() {
   const [currentId, setCurrentId] = useState("1");
 
-  const flattenStructure = (structure: any) => {
-    const result: any = [];
+  const flattenStructure = (structure: FileStructure) => {
+    const result: FileItem[] = [];
 
-    function traverse(node: any) {
+    function traverse(node: Node) {
       result.push({
         id: node.id,
         name: node.name,
@@ -123,7 +127,6 @@ function App() {
     }
 
     traverse(structure);
-
     return result;
   };
 
@@ -177,12 +180,19 @@ function App() {
         </div>
         <div className="flex gap-x-4">
           <a
-            href=""
+            href="https://github.com/chamara-senarath/react-file-xplorer"
+            target="_blank"
+            rel="noreferrer"
             className="flex items-center justify-center rounded-full w-8 h-8 bg-white border-[0.5px] border-[#2563EB]/20 hover:bg-[#2563EB]/10"
           >
             <img className="w-4" src={GitHubIcon} alt="github-icon" />
           </a>
-          <a className="flex items-center justify-center rounded-full w-8 h-8 bg-white border-[0.5px] border-[#2563EB]/20 hover:bg-[#2563EB]/10">
+          <a
+            href="https://www.npmjs.com/package/react-file-xplorer"
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center justify-center rounded-full w-8 h-8 bg-white border-[0.5px] border-[#2563EB]/20 hover:bg-[#2563EB]/10"
+          >
             <img className="w-4" src={NpmIcon} alt="npm-icon" />
           </a>
         </div>
@@ -190,7 +200,7 @@ function App() {
 
       {/* body */}
       <main className="flex flex-col gap-y-8 py-8 px-[10vw] mb-auto">
-        <p className="text-gray-700 text-sm md:text-md">
+        <p className="text-gray-700 text-sm md:text-md lg:text-lg">
           A lightweight, customizable file explorer component for React
           applications that provides an intuitive interface for displaying
           hierarchical file and folder structures. This component offers a
