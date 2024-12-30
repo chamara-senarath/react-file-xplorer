@@ -1,30 +1,145 @@
-# React + TypeScript + Vite
+# React File Xplorer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<div align="center">
+  <img src="./src/assets/logo.svg" alt="React File xplorer Logo" width="180" />
+</div>
 
-Currently, two official plugins are available:
+A lightweight, customizable file xplorer component for React applications. Create beautiful hierarchical file and folder structures with minimal setup and maximum flexibility.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<!-- [![NPM version](https://img.shields.io/npm/v/react-file-xplorer)](https://www.npmjs.com/package/react-file-xplorer) -->
 
-## Expanding the ESLint configuration
+<!-- [![License](https://img.shields.io/npm/l/react-file-xplorer)](https://github.com/chamara-senarath/react-file-xplorer/blob/main/LICENSE) -->
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## ✨ Features
 
-- Configure the top-level `parserOptions` property like this:
+- 🎯 **Simple to Use**: Drop-in component with minimal configuration required
+- 🎨 **Fully Customizable**: Custom icons, sizes, and styling options
+- 📱 **Responsive**: Works seamlessly across all device sizes
+- 🌳 **Visual Hierarchy**: Clear parent-child relationships with guide lines
+- 🔍 **Type Safe**: Written in TypeScript for reliable development
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
+## 🚀 Installation
+
+```bash
+npm install react-file-xplorer
+# or
+yarn add react-file-xplorer
+# or
+pnpm add react-file-xplorer
+```
+
+## 📖 Usage
+
+```tsx
+import Explorer from "react-file-xplorer";
+
+const fileStructure = {
+  id: "root",
+  name: "Project",
+  isFolder: true,
+  items: [
+    {
+      id: "src",
+      name: "src",
+      isFolder: true,
+      items: [
+        {
+          id: "app",
+          name: "app.tsx",
+          isFolder: false,
+          items: [],
+        },
+      ],
+    },
+  ],
+};
+
+function App() {
+  const handleItemClick = (id: string) => {
+    console.log("Clicked item:", id);
+  };
+
+  return (
+    <Explorer
+      fileStructure={fileStructure}
+      onItemClick={handleItemClick}
+      isRootExpanded={true}
+    />
+  );
 }
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## ⚙️ Props
+
+| Prop             | Type                   | Default       | Description                                |
+| ---------------- | ---------------------- | ------------- | ------------------------------------------ |
+| `fileStructure`  | `FileStructure`        | Required      | The hierarchical data structure to display |
+| `icons`          | `IconOptions`          | Default icons | Custom icons for files and folders         |
+| `level`          | `number`               | 0             | Initial indentation level                  |
+| `onItemClick`    | `(id: string) => void` | undefined     | Callback when item is clicked              |
+| `isRootExpanded` | `boolean`              | false         | Whether root folder is expanded by default |
+
+### FileStructure Type
+
+```typescript
+type FileStructure = {
+  id: string;
+  name: string;
+  isFolder: boolean | null;
+  items: FileStructure[];
+  icon?: string;
+};
+```
+
+### IconOptions Type
+
+```typescript
+type IconOptions = {
+  size?: number;
+  fileIcon?: string;
+  folderOpenIcon?: string;
+  folderClosedIcon?: string;
+  chevronUpIcon?: string;
+  chevronDownIcon?: string;
+};
+```
+
+## 🎨 Customization
+
+### Custom Icons
+
+```tsx
+<Explorer
+  fileStructure={fileStructure}
+  icons={{
+    size: 16,
+    fileIcon: "/path/to/file-icon.svg",
+    folderOpenIcon: "/path/to/folder-open.svg",
+    folderClosedIcon: "/path/to/folder-closed.svg",
+    chevronUpIcon: "/path/to/chevron-up.svg",
+    chevronDownIcon: "/path/to/chevron-down.svg",
+  }}
+/>
+```
+
+### Custom Styling
+
+The component uses Tailwind CSS classes by default but can be customized using your own classes:
+
+```tsx
+<div className="custom-wrapper">
+  <Explorer fileStructure={fileStructure} />
+</div>
+```
+
+## 📝 License
+
+MIT © Chamara Senarath
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome! Feel free to check [issues page](https://github.com/chamara-senarath/react-file-xplorer/issues).
+
+## 💖 Show your support
+
+Give a ⭐️ if this project helped you!

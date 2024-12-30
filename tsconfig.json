@@ -2,7 +2,11 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
     "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -14,8 +18,16 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "declaration": true,
+    "typeRoots": [
+      "./dist/index.d.ts"
+    ],
     "declarationDir": "dist"
   },
-  "include": ["src", ".storybook"],
-  "types": ["node"]
+  "include": [
+    "src",
+    "./index.ts"
+  ],
+  "types": [
+    "node"
+  ]
 }

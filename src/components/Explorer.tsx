@@ -42,7 +42,7 @@ const VerticalLine = ({ space }: { space: number }) => {
   );
 };
 
-const Explorer = ({
+export const Explorer = ({
   fileStructure,
   icons,
   level = 0,
@@ -54,7 +54,7 @@ const Explorer = ({
   const getIcon = (
     localIcon: string | undefined,
     globalIcon: string | undefined,
-    defaultIcon: string,
+    defaultIcon: string
   ) => {
     return localIcon ?? globalIcon ?? defaultIcon;
   };
@@ -68,9 +68,9 @@ const Explorer = ({
       getIcon(
         fileStructure?.icon,
         icons?.folderOpenIcon,
-        defaultFolderOpenIcon,
+        defaultFolderOpenIcon
       ),
-    [fileStructure?.icon, icons?.folderOpenIcon],
+    [fileStructure?.icon, icons?.folderOpenIcon]
   );
 
   const folderClosedIcon = useMemo(
@@ -78,9 +78,9 @@ const Explorer = ({
       getIcon(
         fileStructure?.icon,
         icons?.folderClosedIcon,
-        defaultFolderClosedIcon,
+        defaultFolderClosedIcon
       ),
-    [fileStructure?.icon, icons?.folderClosedIcon],
+    [fileStructure?.icon, icons?.folderClosedIcon]
   );
 
   const chevronUpIcon = icons?.chevronUpIcon ?? defaultChevronUpIcon;
@@ -172,5 +172,3 @@ const Explorer = ({
     </div>
   );
 };
-
-export default Explorer;

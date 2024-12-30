@@ -1,14 +1,14 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
-
+import dts from "vite-plugin-dts";
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), dts()],
   build: {
     lib: {
-      entry: path.resolve(__dirname, "src/components/Explorer.tsx"),
-      name: "Explorer",
-      fileName: (format) => `say-hello.${format}.js`,
+      entry: path.resolve(__dirname, "index.ts"),
+      name: "react-file-xplorer",
+      fileName: (format) => `index.${format}.js`,
     },
     rollupOptions: {
       external: ["react", "react-dom"],
@@ -19,5 +19,7 @@ export default defineConfig({
         },
       },
     },
+    sourcemap: true,
+    emptyOutDir: true,
   },
 });
