@@ -1,10 +1,10 @@
 import { MouseEventHandler, useEffect, useMemo, useState } from "react";
-import { classNames } from "../util";
-import defaultChevronDownIcon from "../assets/chevron-down.svg";
-import defaultChevronUpIcon from "../assets/chevron-up.svg";
-import defaultFolderOpenIcon from "../assets/folder-open.svg";
-import defaultFolderClosedIcon from "../assets/folder-closed.svg";
-import defaultFileIcon from "../assets/file.svg";
+import defaultChevronDownIcon from "../../assets/chevron-down.svg";
+import defaultChevronUpIcon from "../../assets/chevron-up.svg";
+import defaultFolderOpenIcon from "../../assets/folder-open.svg";
+import defaultFolderClosedIcon from "../../assets/folder-closed.svg";
+import defaultFileIcon from "../../assets/file.svg";
+import "./index.css";
 
 type FileStructure = {
   id: string;
@@ -34,7 +34,7 @@ const DEFAULT_ICON_SIZE = 14;
 const VerticalLine = ({ space }: { space: number }) => {
   return (
     <span
-      className="absolute border-[0.5px] border-gray-300 h-full z-10"
+      className="vertical-line"
       style={{
         left: `${space * 4}px`,
       }}
@@ -106,17 +106,12 @@ export const Explorer = ({
   // Return folder
   if (fileStructure.isFolder) {
     return (
-      <div className="flex flex-col relative w-full">
+      <div className="explorer-folder">
         {level > 0 && <VerticalLine space={level} />}
-        <div
-          className="flex justify-between px-2 py-1 hover:bg-gray-50 rounded-lg"
-          onClick={handleOnClick}
-        >
+        <div className="folder-header" onClick={handleOnClick}>
           <span
-            className="flex w-full gap-x-1 items-center select-none	cursor-pointer"
-            style={{
-              paddingLeft: `${level * 4}px`,
-            }}
+            className="folder-name"
+            style={{ paddingLeft: `${level * 4}px` }}
           >
             <img
               src={expand ? folderOpenIcon : folderClosedIcon}
@@ -124,19 +119,14 @@ export const Explorer = ({
             />
             {fileStructure.name}
           </span>
-          <button
-            className="select-none cursor-pointer"
-            onClick={onClickChevron}
-          >
+          <button className="folder-chevron" onClick={onClickChevron}>
             <img
               src={expand ? chevronUpIcon : chevronDownIcon}
               width={iconSize}
             />
           </button>
         </div>
-        <div
-          className={classNames(expand ? "flex flex-col" : "hidden", "py-1")}
-        >
+        <div className={`folder-contents ${expand ? "expanded" : "collapsed"}`}>
           {fileStructure.items.map((item) => {
             return (
               <Explorer
@@ -155,17 +145,9 @@ export const Explorer = ({
 
   // Return file
   return (
-    <div
-      className="flex hover:bg-gray-50 rounded-lg px-2 relative"
-      style={{
-        paddingLeft: `${level * 4}px`,
-      }}
-    >
+    <div className="explorer-file" style={{ paddingLeft: `${level * 4}px` }}>
       <VerticalLine space={level} />
-      <div
-        className="flex w-full select-none cursor-pointer px-2 py-1"
-        onClick={handleOnClick}
-      >
+      <div className="file-item" onClick={handleOnClick}>
         <img src={fileIcon} width={iconSize} />
         <span>{fileStructure.name}</span>
       </div>

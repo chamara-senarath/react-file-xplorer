@@ -1,12 +1,12 @@
 # React File Xplorer
 
 <div align="center">
-  <img src="./src/assets/logo.svg" alt="React File xplorer Logo" width="180" />
+  <img src="./assets/logo.svg" alt="React File xplorer Logo" width="180" />
 </div>
 
 A lightweight, customizable file xplorer component for React applications. Create beautiful hierarchical file and folder structures with minimal setup and maximum flexibility.
 
-<!-- [![NPM version](https://img.shields.io/npm/v/react-file-xplorer)](https://www.npmjs.com/package/react-file-xplorer) -->
+[![NPM version](https://img.shields.io/npm/v/react-file-xplorer)](https://www.npmjs.com/package/react-file-xplorer)
 
 <!-- [![License](https://img.shields.io/npm/l/react-file-xplorer)](https://github.com/chamara-senarath/react-file-xplorer/blob/main/LICENSE) -->
 
