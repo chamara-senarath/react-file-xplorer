@@ -48,6 +48,7 @@ const fileStructure = {
           name: "app.tsx",
           isFolder: false,
           items: [],
+          icon: "/path/to/custom-icon.svg", // Custom icon for this file
         },
       ],
     },
@@ -87,7 +88,7 @@ type FileStructure = {
   name: string;
   isFolder: boolean | null;
   items: FileStructure[];
-  icon?: string;
+  icon?: string; // Optional custom icon for this file or folder
 };
 ```
 
@@ -122,9 +123,39 @@ type IconOptions = {
 />
 ```
 
+### Custom Icons for Individual Items
+
+You can set custom icons for individual files and folders by specifying the `icon` property in the `FileStructure`:
+
+```tsx
+const fileStructure = {
+  id: "root",
+  name: "Project",
+  isFolder: true,
+  items: [
+    {
+      id: "src",
+      name: "src",
+      isFolder: true,
+      items: [
+        {
+          id: "app",
+          name: "app.tsx",
+          isFolder: false,
+          items: [],
+          icon: "/path/to/custom-icon.svg", // Custom icon for this file
+        },
+      ],
+    },
+  ],
+};
+```
+
+Note: If an icon is specified in the `FileStructure` for a file or folder, it will override the corresponding icon from the `icons` object.
+
 ### Custom Styling
 
-The component uses Tailwind CSS classes by default but can be customized using your own classes:
+The component can be customized using your own classes:
 
 ```tsx
 <div className="custom-wrapper">
