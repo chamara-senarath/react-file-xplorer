@@ -24,12 +24,15 @@
     "type": "git",
     "url": "https://github.com/chamara-senarath/react-file-xplorer"
   },
+  "homepage": "https://chamara-senarath.github.io/react-file-xplorer",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b ./tsconfig.lib.json && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
   },
   "peerDependencies": {
     "react": "^17.0.0 || ^18.0.0",
@@ -47,6 +50,7 @@
     "eslint": "8.57.0",
     "eslint-plugin-react-hooks": "4.6.2",
     "eslint-plugin-react-refresh": "0.4.7",
+    "gh-pages": "^6.2.0",
     "glob": "^11.0.0",
     "postcss": "8.4.39",
     "tailwindcss": "3.4.4",
