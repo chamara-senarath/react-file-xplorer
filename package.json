@@ -2,7 +2,8 @@
   "name": "react-file-xplorer",
   "description": "A lightweight, customizable file explorer component for React applications that provides an intuitive interface for displaying hierarchical file and folder structures. This component offers a clean, modern design with smooth interactions and extensive customization options.",
   "private": false,
-  "version": "1.0.1",
+  "version": "1.0.8",
+  "license": "MIT",
   "type": "module",
   "author": {
     "name": "Chamara Senarath",

@@ -8,7 +8,7 @@ A lightweight, customizable file xplorer component for React applications. Creat
 
 [![NPM version](https://img.shields.io/npm/v/react-file-xplorer)](https://www.npmjs.com/package/react-file-xplorer)
 
-<!-- [![License](https://img.shields.io/npm/l/react-file-xplorer)](https://github.com/chamara-senarath/react-file-xplorer/blob/main/LICENSE) -->
+[![License](https://img.shields.io/npm/l/react-file-xplorer)](https://github.com/chamara-senarath/react-file-xplorer/blob/main/LICENSE)
 
 ## ✨ Features
 
@@ -165,7 +165,7 @@ The component can be customized using your own classes:
 
 ## 📝 License
 
-MIT © Chamara Senarath
+MIT © [Chamara Senarath](https://github.com/chamara-senarath)
 
 ## 🤝 Contributing
 
