@@ -29,7 +29,7 @@ pnpm add react-file-xplorer
 ## 📖 Usage
 
 ```tsx
-import Explorer from "react-file-xplorer";
+import { Explorer } from "react-file-xplorer";
 
 const fileStructure = {
   id: "root",
@@ -53,7 +53,7 @@ const fileStructure = {
   ],
 };
 
-function App() {
+export default function App() {
   const handleItemClick = (id: string) => {
     console.log("Clicked item:", id);
   };
