@@ -108,6 +108,90 @@ const infoCardsData = [
   },
 ];
 
+const FeatureCard = ({
+  title,
+  description,
+  icon,
+}: {
+  title: string;
+  description: string;
+  icon: string;
+}) => {
+  return (
+    <div className="bg-white rounded-lg shadow-sm border-gray-200 border-[0.5px] p-4 max-w-sm">
+      <div className="flex items-center space-x-3">
+        <div className="bg-blue-100 p-2 rounded-full w-10 h-10 shrink-0">
+          <img src={icon} alt={`feature-${title}`} />
+        </div>
+        <div>
+          <h3 className="text-md font-semibold text-gray-900">{title}</h3>
+          <p className="text-sm text-gray-500">{description}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const InstallInstructions = () => {
+  const [copied, setCopied] = useState(false);
+  const installCommand = "npm install react-file-xplorer";
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(installCommand);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy:", err);
+    }
+  };
+
+  return (
+    <div className="w-full max-w-sm rounded-lg border border-gray-200 bg-gray-50 p-1 shadow-sm">
+      <div className="flex items-center justify-between rounded-md bg-white px-4 py-3">
+        <code className="font-mono text-sm text-gray-700">
+          $ {installCommand}
+        </code>
+        <button
+          onClick={handleCopy}
+          className="ml-4 rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+          aria-label={copied ? "Copied!" : "Copy to clipboard"}
+        >
+          {copied ? (
+            <svg
+              className="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+          ) : (
+            <svg
+              className="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"
+              />
+            </svg>
+          )}
+        </button>
+      </div>
+    </div>
+  );
+};
+
 function App() {
   const [currentId, setCurrentId] = useState("1");
 
@@ -138,30 +222,6 @@ function App() {
 
   const handleItemClick = (id: string) => {
     setCurrentId(id);
-  };
-
-  const InfoCard = ({
-    title,
-    description,
-    icon,
-  }: {
-    title: string;
-    description: string;
-    icon: string;
-  }) => {
-    return (
-      <div className="bg-white rounded-lg shadow-md p-4 max-w-sm">
-        <div className="flex items-center space-x-3">
-          <div className="bg-blue-100 p-2 rounded-full w-10 h-10 shrink-0">
-            <img src={icon} alt={`feature-${title}`} />
-          </div>
-          <div>
-            <h3 className="text-md font-semibold text-gray-900">{title}</h3>
-            <p className="text-sm text-gray-500">{description}</p>
-          </div>
-        </div>
-      </div>
-    );
   };
 
   const isFolder = (id: string) => {
@@ -199,7 +259,7 @@ function App() {
       </header>
 
       {/* body */}
-      <main className="flex flex-col gap-y-8 py-8 px-[10vw] mb-auto">
+      <main className="flex flex-col gap-y-4 lg:gap-y-16 py-8 px-[10vw] mb-auto">
         <p className="text-gray-700 text-sm md:text-md lg:text-lg">
           A lightweight, customizable file explorer component for React
           applications that provides an intuitive interface for displaying
@@ -210,7 +270,7 @@ function App() {
         <div className="flex flex-col items-center gap-4 w-full lg:flex-row lg:items-start lg:h-full">
           <div className="flex flex-wrap justify-center gap-4 lg:w-1/3 lg:justify-start">
             {infoCardsData.map((card, index) => (
-              <InfoCard
+              <FeatureCard
                 key={index}
                 title={card.title}
                 description={card.description}
@@ -249,6 +309,9 @@ function App() {
               </div>
             </div>
           </div>
+        </div>
+        <div className="flex justify-center lg:fixed bottom-20 w-[80vw]">
+          <InstallInstructions />
         </div>
       </main>
 
